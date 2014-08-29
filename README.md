@@ -62,6 +62,6 @@ foreach ($files as $file) {
 This library currently manages these extensions. All of these adapters only
 works if the php extension is installed.
 
-* Zip - http://php.net/manual/en/zip.phar.php
-* Rar - http://php.net/manual/en/rar.phar.php
+* Zip - http://php.net/manual/en/book.zip.php
+* Rar - http://php.net/manual/en/book.rar.php
 * Phar - http://php.net/manual/en/book.phar.php
