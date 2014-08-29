@@ -1,0 +1,35 @@
+{
+    "name": "mmoreram/extractor",
+    "description": "Extractor project for php",
+    "keywords": ["extractor", "php", "Phar", "Rar", "Zip"],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Marc Morera",
+            "email": "yuhu@mmoreram.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "symfony/finder": "~2.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": ">=3.7",
+        "mmoreram/php-formatter": "~1.0"
+    },
+    "suggested": {
+        "ext-phar": "For usage of Phar adapter",
+        "ext-rar": "For usage of Rar adapter",
+        "ext-zip": "For usage of Zip adapter"
+    },
+    "autoload": {
+        "psr-4": {"Mmoreram\\Extractor\\": ""}
+    },
+    "minimum-stability": "stable",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
