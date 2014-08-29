@@ -13,13 +13,14 @@
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
  */
- 
+
 namespace Mmoreram\Extractor\Adapter;
+
 use Mmoreram\Extractor\Adapter\Abstracts\AbstractExtractorAdapter;
 use Mmoreram\Extractor\Adapter\Interfaces\ExtractorAdapterInterface;
-use Symfony\Component\Finder\Finder;
 use RarArchive;
 use RarEntry;
+use Symfony\Component\Finder\Finder;
 
 /**
  * Class RarExtractorAdapter
@@ -51,4 +52,3 @@ class RarExtractorAdapter extends AbstractExtractorAdapter implements ExtractorA
         return $this->createFinderFromDirectory($tmpDirectory);
     }
 }
- 

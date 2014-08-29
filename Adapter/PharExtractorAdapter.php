@@ -18,8 +18,8 @@ namespace Mmoreram\Extractor\Adapter;
 
 use Mmoreram\Extractor\Adapter\Abstracts\AbstractExtractorAdapter;
 use Mmoreram\Extractor\Adapter\Interfaces\ExtractorAdapterInterface;
-use Symfony\Component\Finder\Finder;
 use Phar;
+use Symfony\Component\Finder\Finder;
 
 /**
  * Class PharExtractorAdapter
@@ -42,4 +42,3 @@ class PharExtractorAdapter extends AbstractExtractorAdapter implements Extractor
         return $this->createFinderFromDirectory($tmpDirectory);
     }
 }
- 

@@ -24,4 +24,3 @@ use \Exception;
 class ExtensionNotSupportedException extends Exception
 {
 }
- 

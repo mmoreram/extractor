@@ -56,4 +56,3 @@ abstract class AbstractExtractorAdapter
         return($tempfile);
     }
 }
- 

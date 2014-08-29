@@ -66,4 +66,3 @@ class Extractor
         return $extractorAdapter->extract($filename);
     }
 }
- 

@@ -34,4 +34,3 @@ interface ExtensionResolverInterface
      */
     public function getAdapterNamespaceGivenExtension($fileExtension);
 }
- 

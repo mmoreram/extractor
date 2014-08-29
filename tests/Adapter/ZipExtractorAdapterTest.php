@@ -14,7 +14,7 @@
  * @author Aldo Chiecchia <zimage@tiscali.it>
  */
 
-namespace Extractor\Tests\Adapter;
+namespace Extractor\tests\Adapter;
 
 use Mmoreram\Extractor\Adapter\ZipExtractorAdapter;
 use PHPUnit_Framework_TestCase;
@@ -46,4 +46,3 @@ class ZipExtractorAdapterTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($finder->count(), 3);
     }
 }
- 

@@ -37,4 +37,3 @@ class DummyExtractorAdapter extends AbstractExtractorAdapter implements Extracto
         return Finder::create();
     }
 }
- 

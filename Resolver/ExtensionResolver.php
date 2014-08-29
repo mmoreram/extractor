@@ -58,4 +58,3 @@ class ExtensionResolver implements ExtensionResolverInterface
         return $adapterNamespace;
     }
 }
- 

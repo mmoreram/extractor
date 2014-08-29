@@ -44,4 +44,3 @@ class ZipExtractorAdapter extends AbstractExtractorAdapter implements ExtractorA
         return $this->createFinderFromDirectory($tmpDirectory);
     }
 }
- 

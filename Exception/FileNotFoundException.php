@@ -13,7 +13,7 @@
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
  */
- 
+
 namespace Mmoreram\Extractor\Exception;
 
 use Exception;
@@ -25,4 +25,3 @@ class FileNotFoundException extends Exception
 {
 
 }
- 

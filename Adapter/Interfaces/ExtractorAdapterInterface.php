@@ -32,4 +32,3 @@ interface ExtractorAdapterInterface
      */
     public function extract($filePath);
 }
- 

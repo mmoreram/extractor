@@ -13,8 +13,8 @@
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
  */
- 
-namespace Extractor\Tests\Adapter;
+
+namespace Extractor\tests\Adapter;
 
 use Mmoreram\Extractor\Adapter\PharExtractorAdapter;
 use PHPUnit_Framework_TestCase;
@@ -46,4 +46,3 @@ class PharExtractorAdapterTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($finder->count(), 3);
     }
 }
- 

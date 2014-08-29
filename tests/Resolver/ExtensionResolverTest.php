@@ -13,8 +13,8 @@
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
  */
- 
-namespace Extractor\Tests\Resolver;
+
+namespace Extractor\tests\Resolver;
 
 use Mmoreram\Extractor\Exception\ExtensionNotSupportedException;
 use Mmoreram\Extractor\Resolver\ExtensionResolver;
@@ -72,4 +72,3 @@ class ExtensionResolverTest extends PHPUnit_Framework_TestCase
         }
     }
 }
- 

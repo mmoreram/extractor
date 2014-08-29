@@ -13,8 +13,9 @@
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
  */
- 
-namespace Extractor\Tests\Adapter;
+
+namespace Extractor\tests\Adapter;
+
 use Mmoreram\Extractor\Adapter\RarExtractorAdapter;
 use PHPUnit_Framework_TestCase;
 
@@ -45,4 +46,3 @@ class RarExtractorAdapterTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($finder->count(), 3);
     }
 }
- 

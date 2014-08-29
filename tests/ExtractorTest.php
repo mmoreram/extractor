@@ -13,8 +13,8 @@
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
  */
- 
-namespace Extractor\Tests;
+
+namespace Extractor\tests;
 
 use Mmoreram\Extractor\Extractor;
 use PHPUnit_Framework_TestCase;
@@ -47,4 +47,3 @@ class ExtractorTest extends PHPUnit_Framework_TestCase
         );
     }
 }
- 
