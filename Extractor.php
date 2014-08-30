@@ -14,7 +14,9 @@
 namespace Mmoreram\Extractor;
 
 use Mmoreram\Extractor\Adapter\Interfaces\ExtractorAdapterInterface;
+use Mmoreram\Extractor\Exception\AdapterNotAvailableException;
 use Mmoreram\Extractor\Exception\ExtensionNotSupportedException;
+use Mmoreram\Extractor\Exception\FileNotFoundException;
 use Mmoreram\Extractor\Resolver\ExtensionResolver;
 use Mmoreram\Extractor\Resolver\Interfaces\ExtensionResolverInterface;
 use Symfony\Component\Finder\Finder;
@@ -44,25 +46,47 @@ class Extractor
     /**
      * Extract files from compressed file
      *
-     * @param string $filename File name
+     * @param string $filePath Compressed file path
      *
-     * @return Finder
+     * @return Finder Finder instance with all files added
      *
      * @throws ExtensionNotSupportedException Exception not found
+     * @throws AdapterNotAvailableException   Adapter not available
+     * @throws FileNotFoundException          File not found
      */
-    public function extractFromFile($filename)
+    public function extractFromFile($filePath)
     {
-        $extension = pathinfo($filename, PATHINFO_EXTENSION);
+        if (!is_file($filePath)) {
+
+            throw new FileNotFoundException($filePath);
+        }
+
+        $extension = pathinfo($filePath, PATHINFO_EXTENSION);
 
         $extractorAdapterNamespace = $this
             ->extensionResolver
             ->getAdapterNamespaceGivenExtension($extension);
 
-        /**
-         * @var ExtractorAdapterInterface $extractorAdapter
-         */
-        $extractorAdapter = new $extractorAdapterNamespace();
+        $extractorAdapter = $this
+            ->instanceExtractorAdapter($extractorAdapterNamespace);
 
-        return $extractorAdapter->extract($filename);
+        if (!$extractorAdapter->isAvailable()) {
+
+            throw new AdapterNotAvailableException($extractorAdapter->getIdentifier());
+        }
+
+        return $extractorAdapter->extract($filePath);
+    }
+
+    /**
+     * Instance new extractor adapter given its namespace
+     *
+     * @param string $extractorAdapterNamespace Extractor Adapter namespace
+     *
+     * @return ExtractorAdapterInterface Extrator adapter
+     */
+    protected function instanceExtractorAdapter($extractorAdapterNamespace)
+    {
+        return new $extractorAdapterNamespace();
     }
 }

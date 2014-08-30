@@ -13,12 +13,12 @@
 
 namespace Mmoreram\Extractor\Exception;
 
-use \Exception;
+use Exception;
 
 /**
- * Class ExtensionNotSupportedException
+ * Class AdapterNotAvailableException
  */
-class ExtensionNotSupportedException extends Exception
+class AdapterNotAvailableException extends Exception
 {
     /**
      * (PHP 5 &gt;= 5.1.0)<br/>
@@ -32,7 +32,7 @@ class ExtensionNotSupportedException extends Exception
      */
     public function __construct($message = "", $code = 0, Exception $previous = null)
     {
-        $message = 'Extension "' . $message . '" is currenly not supported. Extensions supported are [RAR, ZIP, PHAR]';
+        $message = 'Adapter "' . $message . '" is currenly not available. Please check if you have the needed php extension installed in your php.ini';
 
         parent::__construct($message, $code, $previous);
     }
