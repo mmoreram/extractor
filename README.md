@@ -4,6 +4,9 @@ Extractor library for php
 This library extracts your files from compressed files and returns a Symfony
 Finder instance, ready to be managed
 
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/1940740e-9fe0-498e-8962-024b173a29c0/mini.png)](https://insight.sensiolabs.com/projects/1940740e-9fe0-498e-8962-024b173a29c0)
+[![License](https://poser.pugx.org/mmoreram/extractor/license.png)](https://packagist.org/packages/mmoreram/extractor)
+
 # Installing/Configuring
 
 ## Tags
