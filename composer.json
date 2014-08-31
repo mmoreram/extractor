@@ -19,7 +19,7 @@
         "fabpot/php-cs-fixer": "~0.1",
         "mmoreram/php-formatter": "~1.0"
     },
-    "suggested": {
+    "suggest": {
         "ext-phar": "For usage of Phar adapter",
         "ext-rar": "For usage of Rar adapter",
         "ext-zip": "For usage of Zip adapter"
