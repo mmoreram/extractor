@@ -39,7 +39,7 @@ class RarExtractorAdapterTest extends PHPUnit_Framework_TestCase
     public function testExtract()
     {
         $rarExtractorAdapter = new RarExtractorAdapter();
-        $finder = $rarExtractorAdapter->extract(dirname(__FILE__). '/Fixtures/rar.rar');
+        $finder = $rarExtractorAdapter->extract(dirname(__FILE__). '/Fixtures/file.rar');
 
         $this->assertEquals($finder->count(), 3);
     }

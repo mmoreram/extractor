@@ -68,3 +68,6 @@ works if the php extension is installed.
 * Zip - http://php.net/manual/en/book.zip.php
 * Rar - http://php.net/manual/en/book.rar.php
 * Phar - http://php.net/manual/en/book.phar.php
+* Tar
+* GZ
+* BZ2

@@ -40,40 +40,31 @@ class ExtensionResolverTest extends PHPUnit_Framework_TestCase
 
     /**
      * Test zip extension
+     *
+     * @dataProvider dataTestExtension
      */
-    public function testZipExtension()
+    public function testExtension($extension, $adapterNamespace)
     {
         $this->assertEquals(
-            '\Mmoreram\Extractor\Adapter\ZipExtractorAdapter',
+            $adapterNamespace,
             $this
                 ->extensionResolver
-                ->getAdapterNamespaceGivenExtension('zip')
+                ->getAdapterNamespaceGivenExtension($extension)
         );
     }
 
     /**
-     * Test rar extension
+     * Data for test extensions
      */
-    public function testRarExtension()
+    public function dataTestExtension()
     {
-        $this->assertEquals(
-            '\Mmoreram\Extractor\Adapter\RarExtractorAdapter',
-            $this
-                ->extensionResolver
-                ->getAdapterNamespaceGivenExtension('rar')
-        );
-    }
-
-    /**
-     * Test phar extension
-     */
-    public function testPharExtension()
-    {
-        $this->assertEquals(
-            '\Mmoreram\Extractor\Adapter\PharExtractorAdapter',
-            $this
-                ->extensionResolver
-                ->getAdapterNamespaceGivenExtension('phar')
+        return array(
+            array('zip', '\Mmoreram\Extractor\Adapter\ZipExtractorAdapter'),
+            array('rar', '\Mmoreram\Extractor\Adapter\RarExtractorAdapter'),
+            array('phar', '\Mmoreram\Extractor\Adapter\PharExtractorAdapter'),
+            array('tar', '\Mmoreram\Extractor\Adapter\TarExtractorAdapter'),
+            array('gz', '\Mmoreram\Extractor\Adapter\TarGzExtractorAdapter'),
+            array('bz2', '\Mmoreram\Extractor\Adapter\TarBz2ExtractorAdapter'),
         );
     }
 

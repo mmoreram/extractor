@@ -32,7 +32,7 @@ class ExtensionNotSupportedException extends Exception
      */
     public function __construct($message = "", $code = 0, Exception $previous = null)
     {
-        $message = 'Extension "' . $message . '" is currenly not supported. Extensions supported are [RAR, ZIP, PHAR]';
+        $message = 'Extension "' . $message . '" is currenly not supported. Extensions supported are [RAR, ZIP, PHAR, TAR, GZ, BZ2]';
 
         parent::__construct($message, $code, $previous);
     }

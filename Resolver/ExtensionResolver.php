@@ -1,9 +1,7 @@
 <?php
 
 /**
- * This file is part of the Elcodi package.
- *
- * Copyright (c) 2014 Elcodi.com
+ * This file is part of the Extractor package.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,7 +9,6 @@
  * Feel free to edit as you please, and have fun.
  *
  * @author Marc Morera <yuhu@mmoreram.com>
- * @author Aldo Chiecchia <zimage@tiscali.it>
  */
 
 namespace Mmoreram\Extractor\Resolver;
@@ -49,6 +46,18 @@ class ExtensionResolver implements ExtensionResolverInterface
 
             case 'phar':
                 $adapterNamespace .= 'PharExtractorAdapter';
+                break;
+
+            case 'tar':
+                $adapterNamespace .= 'TarExtractorAdapter';
+                break;
+
+            case 'gz':
+                $adapterNamespace .= 'TarGzExtractorAdapter';
+                break;
+
+            case 'bz2':
+                $adapterNamespace .= 'TarBz2ExtractorAdapter';
                 break;
 
             default:

@@ -13,23 +13,23 @@
 
 namespace Extractor\tests\Adapter;
 
-use Mmoreram\Extractor\Adapter\ZipExtractorAdapter;
+use Mmoreram\Extractor\Adapter\TarBz2ExtractorAdapter;
 use PHPUnit_Framework_TestCase;
 
 /**
- * Class ZipExtractorAdapterTest
+ * Class TarBz2ExtractorAdapterTest
  */
-class ZipExtractorAdapterTest extends PHPUnit_Framework_TestCase
+class TarBz2ExtractorAdapterTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Setup
      */
     public function setUp()
     {
-        $zipExtractorAdapter = new ZipExtractorAdapter();
-        if (!$zipExtractorAdapter->isAvailable()) {
+        $pharExtractorAdapter = new TarBz2ExtractorAdapter();
+        if (!$pharExtractorAdapter->isAvailable()) {
 
-            $this->markTestSkipped('PHP Zip extension not installed');
+            $this->markTestSkipped('Phar extension not installed');
         }
     }
 
@@ -38,8 +38,8 @@ class ZipExtractorAdapterTest extends PHPUnit_Framework_TestCase
      */
     public function testExtract()
     {
-        $zipExtractorAdapter = new ZipExtractorAdapter();
-        $finder = $zipExtractorAdapter->extract(dirname(__FILE__) . '/Fixtures/file.zip');
+        $tarExtractorAdapter = new TarBz2ExtractorAdapter();
+        $finder = $tarExtractorAdapter->extract(dirname(__FILE__). '/Fixtures/file.tar.bz2');
 
         $this->assertEquals($finder->count(), 3);
     }

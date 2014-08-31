@@ -39,7 +39,7 @@ class PharExtractorAdapterTest extends PHPUnit_Framework_TestCase
     public function testExtract()
     {
         $pharExtractorAdapter = new PharExtractorAdapter();
-        $finder = $pharExtractorAdapter->extract(dirname(__FILE__). '/Fixtures/phar.phar');
+        $finder = $pharExtractorAdapter->extract(dirname(__FILE__). '/Fixtures/file.phar');
 
         $this->assertEquals($finder->count(), 3);
     }

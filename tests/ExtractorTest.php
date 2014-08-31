@@ -16,6 +16,7 @@ namespace Extractor\tests;
 use Mmoreram\Extractor\Exception\AdapterNotAvailableException;
 use Mmoreram\Extractor\Exception\FileNotFoundException;
 use Mmoreram\Extractor\Extractor;
+use Mmoreram\Extractor\Resolver\ExtensionResolver;
 use PHPUnit_Framework_TestCase;
 
 /**
@@ -28,7 +29,7 @@ class ExtractorTest extends PHPUnit_Framework_TestCase
      */
     public function testExtractFromFile()
     {
-        $fileName = dirname(__FILE__) . '/Adapter/Fixtures/phar.phar';
+        $fileName = dirname(__FILE__) . '/Adapter/Fixtures/file.phar';
 
         $extensionResolver = $this
             ->getMock('\Mmoreram\Extractor\Resolver\Interfaces\ExtensionResolverInterface');
@@ -75,7 +76,7 @@ class ExtractorTest extends PHPUnit_Framework_TestCase
      */
     public function testExtractWithNotAvailableAdapter()
     {
-        $fileName = dirname(__FILE__) . '/Adapter/Fixtures/phar.phar';
+        $fileName = dirname(__FILE__) . '/Adapter/Fixtures/file.phar';
 
         $extractorAdapterInterface = $this
             ->getMock('\Mmoreram\Extractor\Adapter\Interfaces\ExtractorAdapterInterface');
@@ -104,6 +105,23 @@ class ExtractorTest extends PHPUnit_Framework_TestCase
             $this->fail();
         } catch (AdapterNotAvailableException $e) {
 
+        }
+    }
+
+    /**
+     * Tests extractFromFile
+     */
+    public function testExtractWithMultiExtension()
+    {
+        $fileName = dirname(__FILE__) . '/Adapter/Fixtures/file.tar.gz';
+
+        $extensionResolver = new ExtensionResolver();
+        $extractor = new Extractor($extensionResolver);
+
+        try {
+            $extractor->extractFromFile($fileName);
+        } catch (AdapterNotAvailableException $e) {
+            $this->fail();
         }
     }
 }
