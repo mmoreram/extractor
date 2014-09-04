@@ -13,7 +13,7 @@
 
 namespace Mmoreram\Extractor\Exception;
 
-use \Exception;
+use Exception;
 
 /**
  * Class ExtensionNotSupportedException
