@@ -25,21 +25,21 @@ use Symfony\Component\Finder\Finder;
 class TarGzExtractorAdapter extends AbstractExtractorAdapter implements ExtractorAdapterInterface
 {
     /**
-     * Checks if current adapter can be used
-     *
-     * @return boolean Adapter usable
-     */
-    public function isAvailable()
-    {
-        return 'Gz';
-    }
-
-    /**
      * Return the adapter identifier
      *
      * @return string Adapter identifier
      */
     public function getIdentifier()
+    {
+        return 'Gz';
+    }
+
+    /**
+     * Checks if current adapter can be used
+     *
+     * @return boolean Adapter usable
+     */
+    public function isAvailable()
     {
         return class_exists('\PharData');
     }

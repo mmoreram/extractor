@@ -25,21 +25,21 @@ use Symfony\Component\Finder\Finder;
 class TarExtractorAdapter extends AbstractExtractorAdapter implements ExtractorAdapterInterface
 {
     /**
-     * Checks if current adapter can be used
-     *
-     * @return boolean Adapter usable
-     */
-    public function isAvailable()
-    {
-        return 'Tar';
-    }
-
-    /**
      * Return the adapter identifier
      *
      * @return string Adapter identifier
      */
     public function getIdentifier()
+    {
+        return 'Tar';
+    }
+
+    /**
+     * Checks if current adapter can be used
+     *
+     * @return boolean Adapter usable
+     */
+    public function isAvailable()
     {
         return class_exists('\PharData');
     }

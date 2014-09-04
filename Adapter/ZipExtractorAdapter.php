@@ -24,16 +24,6 @@ use ZipArchive;
 class ZipExtractorAdapter extends AbstractExtractorAdapter implements ExtractorAdapterInterface
 {
     /**
-     * Checks if current adapter can be used
-     *
-     * @return boolean Adapter usable
-     */
-    public function isAvailable()
-    {
-        return class_exists('\ZipArchive');
-    }
-
-    /**
      * Return the adapter identifier
      *
      * @return string Adapter identifier
@@ -41,6 +31,16 @@ class ZipExtractorAdapter extends AbstractExtractorAdapter implements ExtractorA
     public function getIdentifier()
     {
         return 'Zip';
+    }
+
+    /**
+     * Checks if current adapter can be used
+     *
+     * @return boolean Adapter usable
+     */
+    public function isAvailable()
+    {
+        return class_exists('\ZipArchive');
     }
 
     /**

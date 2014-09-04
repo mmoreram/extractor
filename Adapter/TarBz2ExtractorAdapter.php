@@ -25,21 +25,21 @@ use Symfony\Component\Finder\Finder;
 class TarBz2ExtractorAdapter extends AbstractExtractorAdapter implements ExtractorAdapterInterface
 {
     /**
-     * Checks if current adapter can be used
-     *
-     * @return boolean Adapter usable
-     */
-    public function isAvailable()
-    {
-        return 'Bz2';
-    }
-
-    /**
      * Return the adapter identifier
      *
      * @return string Adapter identifier
      */
     public function getIdentifier()
+    {
+        return 'Bz2';
+    }
+
+    /**
+     * Checks if current adapter can be used
+     *
+     * @return boolean Adapter usable
+     */
+    public function isAvailable()
     {
         return class_exists('\PharData');
     }
