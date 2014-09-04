@@ -1,7 +1,7 @@
 Extractor library for php
 =========================
 
-This library extracts your files from compressed files and returns a Symfony
+This library extracts your files from compressed packages and returns a Symfony
 Finder instance, ready to be managed
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/6de61eb0-a424-48bc-9683-24252bd7b0d5/mini.png)](https://insight.sensiolabs.com/projects/6de61eb0-a424-48bc-9683-24252bd7b0d5)
