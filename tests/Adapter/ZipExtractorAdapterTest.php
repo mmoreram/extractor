@@ -11,9 +11,10 @@
  * @author Marc Morera <yuhu@mmoreram.com>
  */
 
-namespace Extractor\tests\Adapter;
+namespace Mmoreram\Extractor\tests\Adapter;
 
 use Mmoreram\Extractor\Adapter\ZipExtractorAdapter;
+use Mmoreram\Extractor\Filesystem\TemporaryDirectory;
 use PHPUnit_Framework_TestCase;
 
 /**
@@ -26,7 +27,8 @@ class ZipExtractorAdapterTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $zipExtractorAdapter = new ZipExtractorAdapter();
+        $filesystem = new TemporaryDirectory();
+        $zipExtractorAdapter = new ZipExtractorAdapter($filesystem);
         if (!$zipExtractorAdapter->isAvailable()) {
 
             $this->markTestSkipped('PHP Zip extension not installed');
@@ -38,7 +40,8 @@ class ZipExtractorAdapterTest extends PHPUnit_Framework_TestCase
      */
     public function testExtract()
     {
-        $zipExtractorAdapter = new ZipExtractorAdapter();
+        $filesystem = new TemporaryDirectory();
+        $zipExtractorAdapter = new ZipExtractorAdapter($filesystem);
         $finder = $zipExtractorAdapter->extract(dirname(__FILE__) . '/Fixtures/file.zip');
 
         $this->assertEquals($finder->count(), 3);

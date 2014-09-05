@@ -11,7 +11,7 @@
  * @author Marc Morera <yuhu@mmoreram.com>
  */
 
-namespace Extractor\tests\Resolver;
+namespace Mmoreram\Extractor\tests\Resolver;
 
 use Mmoreram\Extractor\Exception\ExtensionNotSupportedException;
 use Mmoreram\Extractor\Resolver\ExtensionResolver;

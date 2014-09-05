@@ -36,7 +36,7 @@ $ curl -sS https://getcomposer.org/installer | php
 $ php composer.phar update
 ```
 
-# Usage
+## Usage
 
 Get a finder instance given a compressed file
 
@@ -44,11 +44,16 @@ Get a finder instance given a compressed file
 <?php
 
 use Symfony\Component\Finder\Finder;
+use Mmoreram\Extractor\Filesystem\TemporaryDirectory;
 use Mmoreram\Extractor\Resolver\ExtensionResolver;
 use Mmoreram\Extractor\Extractor;
 
+$temporaryDirectory = new TemporaryDirectory();
 $extensionResolver = new ExtensionResolver;
-$extractor = new Extractor($extensionResolver);
+$extractor = new Extractor(
+    $temporaryDirectory,
+    $extensionResolver
+);
 
 /**
  * @var Finder $files
@@ -60,7 +65,7 @@ foreach ($files as $file) {
 }
 ```
 
-# Adapters
+## Adapters
 
 This library currently manages these extensions. All of these adapters only
 works if the php extension is installed.
@@ -71,3 +76,37 @@ works if the php extension is installed.
 * Tar
 * GZ
 * BZ2
+
+## Directories
+
+This library provide the way of working with temporary and specific directories.
+
+### Temporary directory
+
+``` php
+use Mmoreram\Extractor\Filesystem\TemporaryDirectory;
+use Mmoreram\Extractor\Resolver\ExtensionResolver;
+use Mmoreram\Extractor\Extractor;
+
+$temporaryDirectory = new TemporaryDirectory();
+$extensionResolver = new ExtensionResolver;
+$extractor = new Extractor(
+    $temporaryDirectory,
+    $extensionResolver
+);
+```
+
+### Specific directory
+
+``` php
+use Mmoreram\Extractor\Filesystem\SpecificDirectory;
+use Mmoreram\Extractor\Resolver\ExtensionResolver;
+use Mmoreram\Extractor\Extractor;
+
+$specificDirectory = new SpecificDirectory('/my/specific/path');
+$extensionResolver = new ExtensionResolver;
+$extractor = new Extractor(
+    $specificDirectory,
+    $extensionResolver
+);
+```
