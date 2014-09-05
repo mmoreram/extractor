@@ -110,4 +110,3 @@ $extractor = new Extractor(
     $extensionResolver
 );
 ```
-c
