@@ -13,6 +13,7 @@
 
 namespace Mmoreram\Extractor\Adapter\Abstracts;
 
+use Mmoreram\Extractor\Filesystem\Interfaces\DirectoryInterface;
 use Symfony\Component\Finder\Finder;
 
 /**
@@ -20,6 +21,23 @@ use Symfony\Component\Finder\Finder;
  */
 abstract class AbstractExtractorAdapter
 {
+    /**
+     * @var DirectoryInterface
+     *
+     * Directory
+     */
+    protected $directory;
+
+    /**
+     * Construct method
+     *
+     * @param DirectoryInterface $directory Directory
+     */
+    public function __construct(DirectoryInterface $directory)
+    {
+        $this->directory = $directory;
+    }
+
     /**
      * Create finder from a directory
      *
@@ -33,23 +51,5 @@ abstract class AbstractExtractorAdapter
         $finder->in($directory);
 
         return $finder;
-    }
-
-    /**
-     * Returns new random temporary dir
-     *
-     * @return string Temporary dir
-     */
-    protected function getRandomTemporaryDir()
-    {
-        $tempfile = tempnam(sys_get_temp_dir(), '_extractor');
-
-        if (file_exists($tempfile)) {
-            unlink($tempfile);
-        }
-
-        mkdir($tempfile);
-
-        return($tempfile);
     }
 }

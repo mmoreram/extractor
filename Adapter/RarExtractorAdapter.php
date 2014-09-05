@@ -53,7 +53,7 @@ class RarExtractorAdapter extends AbstractExtractorAdapter implements ExtractorA
      */
     public function extract($filePath)
     {
-        $tmpDirectory = $this->getRandomTemporaryDir();
+        $directory = $this->directory->getDirectoryPath();
         $rarArchive = RarArchive::open($filePath);
         $rarEntries = $rarArchive->getEntries();
 
@@ -62,9 +62,9 @@ class RarExtractorAdapter extends AbstractExtractorAdapter implements ExtractorA
          */
         foreach ($rarEntries as $rarEntry) {
 
-            $rarEntry->extract($tmpDirectory);
+            $rarEntry->extract($directory);
         }
 
-        return $this->createFinderFromDirectory($tmpDirectory);
+        return $this->createFinderFromDirectory($directory);
     }
 }

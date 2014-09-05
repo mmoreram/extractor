@@ -11,11 +11,12 @@
  * @author Marc Morera <yuhu@mmoreram.com>
  */
 
-namespace Extractor\tests;
+namespace Mmoreram\Extractor\tests;
 
 use Mmoreram\Extractor\Exception\AdapterNotAvailableException;
 use Mmoreram\Extractor\Exception\FileNotFoundException;
 use Mmoreram\Extractor\Extractor;
+use Mmoreram\Extractor\Filesystem\TemporaryDirectory;
 use Mmoreram\Extractor\Resolver\ExtensionResolver;
 use PHPUnit_Framework_TestCase;
 
@@ -39,7 +40,8 @@ class ExtractorTest extends PHPUnit_Framework_TestCase
             ->method('getAdapterNamespaceGivenExtension')
             ->will($this->returnValue('Mmoreram\Extractor\Adapter\DummyExtractorAdapter'));
 
-        $extractor = new Extractor($extensionResolver);
+        $filesystem = new TemporaryDirectory();
+        $extractor = new Extractor($filesystem, $extensionResolver);
 
         $this->assertInstanceOf(
             'Symfony\Component\Finder\Finder',
@@ -62,7 +64,9 @@ class ExtractorTest extends PHPUnit_Framework_TestCase
             ->method('getAdapterNamespaceGivenExtension')
             ->will($this->returnValue('Mmoreram\Extractor\Adapter\DummyExtractorAdapter'));
 
-        $extractor = new Extractor($extensionResolver);
+        $filesystem = new TemporaryDirectory();
+        $extractor = new Extractor($filesystem, $extensionResolver);
+
         try {
             $extractor->extractFromFile($fileName);
             $this->fail();
@@ -88,10 +92,11 @@ class ExtractorTest extends PHPUnit_Framework_TestCase
 
         $extensionResolver = $this
             ->getMock('\Mmoreram\Extractor\Resolver\Interfaces\ExtensionResolverInterface');
+        $filesystem = new TemporaryDirectory();
 
         $extractor = $this
             ->getMockBuilder('\Mmoreram\Extractor\Extractor')
-            ->setConstructorArgs(array($extensionResolver))
+            ->setConstructorArgs(array($filesystem, $extensionResolver))
             ->setMethods(array('instanceExtractorAdapter'))
             ->getMock();
 
@@ -116,7 +121,8 @@ class ExtractorTest extends PHPUnit_Framework_TestCase
         $fileName = dirname(__FILE__) . '/Adapter/Fixtures/file.tar.gz';
 
         $extensionResolver = new ExtensionResolver();
-        $extractor = new Extractor($extensionResolver);
+        $filesystem = new TemporaryDirectory();
+        $extractor = new Extractor($filesystem, $extensionResolver);
 
         try {
             $extractor->extractFromFile($fileName);

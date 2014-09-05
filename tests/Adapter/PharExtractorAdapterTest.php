@@ -11,9 +11,10 @@
  * @author Marc Morera <yuhu@mmoreram.com>
  */
 
-namespace Extractor\tests\Adapter;
+namespace Mmoreram\Extractor\tests\Adapter;
 
 use Mmoreram\Extractor\Adapter\PharExtractorAdapter;
+use Mmoreram\Extractor\Filesystem\TemporaryDirectory;
 use PHPUnit_Framework_TestCase;
 
 /**
@@ -26,7 +27,8 @@ class PharExtractorAdapterTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $pharExtractorAdapter = new PharExtractorAdapter();
+        $filesystem = new TemporaryDirectory();
+        $pharExtractorAdapter = new PharExtractorAdapter($filesystem);
         if (!$pharExtractorAdapter->isAvailable()) {
 
             $this->markTestSkipped('PHP Phar extension not installed');
@@ -38,7 +40,8 @@ class PharExtractorAdapterTest extends PHPUnit_Framework_TestCase
      */
     public function testExtract()
     {
-        $pharExtractorAdapter = new PharExtractorAdapter();
+        $filesystem = new TemporaryDirectory();
+        $pharExtractorAdapter = new PharExtractorAdapter($filesystem);
         $finder = $pharExtractorAdapter->extract(dirname(__FILE__). '/Fixtures/file.phar');
 
         $this->assertEquals($finder->count(), 3);

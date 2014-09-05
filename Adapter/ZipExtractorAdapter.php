@@ -52,11 +52,11 @@ class ZipExtractorAdapter extends AbstractExtractorAdapter implements ExtractorA
      */
     public function extract($filePath)
     {
-        $tmpDirectory = $this->getRandomTemporaryDir();
+        $directory = $this->directory->getDirectoryPath();
         $zipArchive = new ZipArchive();
         $zipArchive->open($filePath);
-        $zipArchive->extractTo($tmpDirectory);
+        $zipArchive->extractTo($directory);
 
-        return $this->createFinderFromDirectory($tmpDirectory);
+        return $this->createFinderFromDirectory($directory);
     }
 }

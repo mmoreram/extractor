@@ -53,10 +53,10 @@ class TarExtractorAdapter extends AbstractExtractorAdapter implements ExtractorA
      */
     public function extract($filePath)
     {
-        $tmpDirectory = $this->getRandomTemporaryDir();
+        $directory = $this->directory->getDirectoryPath();
         $pharArchive = new PharData($filePath, null, null, Phar::TAR);
-        $pharArchive->extractTo($tmpDirectory);
+        $pharArchive->extractTo($directory);
 
-        return $this->createFinderFromDirectory($tmpDirectory);
+        return $this->createFinderFromDirectory($directory);
     }
 }

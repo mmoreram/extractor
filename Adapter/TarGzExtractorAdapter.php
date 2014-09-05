@@ -53,10 +53,10 @@ class TarGzExtractorAdapter extends AbstractExtractorAdapter implements Extracto
      */
     public function extract($filePath)
     {
-        $tmpDirectory = $this->getRandomTemporaryDir();
+        $directory = $this->directory->getDirectoryPath();
         $pharArchive = new PharData($filePath, null, null, Phar::GZ);
-        $pharArchive->extractTo($tmpDirectory);
+        $pharArchive->extractTo($directory);
 
-        return $this->createFinderFromDirectory($tmpDirectory);
+        return $this->createFinderFromDirectory($directory);
     }
 }

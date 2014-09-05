@@ -17,7 +17,7 @@ use Mmoreram\Extractor\Adapter\Interfaces\ExtractorAdapterInterface;
 use Mmoreram\Extractor\Exception\AdapterNotAvailableException;
 use Mmoreram\Extractor\Exception\ExtensionNotSupportedException;
 use Mmoreram\Extractor\Exception\FileNotFoundException;
-use Mmoreram\Extractor\Resolver\ExtensionResolver;
+use Mmoreram\Extractor\Filesystem\Interfaces\DirectoryInterface;
 use Mmoreram\Extractor\Resolver\Interfaces\ExtensionResolverInterface;
 use Symfony\Component\Finder\Finder;
 
@@ -27,7 +27,14 @@ use Symfony\Component\Finder\Finder;
 class Extractor
 {
     /**
-     * @var ExtensionResolver
+     * @var DirectoryInterface
+     *
+     * Directory
+     */
+    protected $directory;
+
+    /**
+     * @var ExtensionResolverInterface
      *
      * Extension resolver
      */
@@ -36,10 +43,15 @@ class Extractor
     /**
      * Construct method
      *
+     * @param DirectoryInterface         $directory         Directory
      * @param ExtensionResolverInterface $extensionResolver Extension resolver
      */
-    public function __construct(ExtensionResolverInterface $extensionResolver)
+    public function __construct(
+        DirectoryInterface $directory,
+        ExtensionResolverInterface $extensionResolver
+    )
     {
+        $this->directory = $directory;
         $this->extensionResolver = $extensionResolver;
     }
 
@@ -62,6 +74,7 @@ class Extractor
         }
 
         $extension = pathinfo($filePath, PATHINFO_EXTENSION);
+        $this->checkDirectory();
 
         $extractorAdapterNamespace = $this
             ->extensionResolver
@@ -83,10 +96,29 @@ class Extractor
      *
      * @param string $extractorAdapterNamespace Extractor Adapter namespace
      *
-     * @return ExtractorAdapterInterface Extrator adapter
+     * @return ExtractorAdapterInterface Extractor adapter
      */
     protected function instanceExtractorAdapter($extractorAdapterNamespace)
     {
-        return new $extractorAdapterNamespace();
+        return new $extractorAdapterNamespace($this->directory);
+    }
+
+    /**
+     * Check directory existence and integrity
+     *
+     * @return $this self Object
+     */
+    protected function checkDirectory()
+    {
+        $directoryPath = $this
+            ->directory
+            ->getDirectoryPath();
+
+        if (!is_dir($directoryPath)) {
+
+            mkdir($directoryPath);
+        }
+
+        return $this;
     }
 }
