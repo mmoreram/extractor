@@ -17,7 +17,6 @@ use Mmoreram\Extractor\Exception\AdapterNotAvailableException;
 use Mmoreram\Extractor\Exception\FileNotFoundException;
 use Mmoreram\Extractor\Extractor;
 use Mmoreram\Extractor\Filesystem\TemporaryDirectory;
-use Mmoreram\Extractor\Resolver\ExtensionResolver;
 use PHPUnit_Framework_TestCase;
 
 /**
