@@ -18,7 +18,6 @@ use Mmoreram\Extractor\Exception\AdapterNotAvailableException;
 use Mmoreram\Extractor\Exception\ExtensionNotSupportedException;
 use Mmoreram\Extractor\Exception\FileNotFoundException;
 use Mmoreram\Extractor\Filesystem\Interfaces\DirectoryInterface;
-use Mmoreram\Extractor\Resolver\Interfaces\ExtensionResolverInterface;
 use Symfony\Component\Finder\Finder;
 
 /**
@@ -34,25 +33,15 @@ class Extractor
     protected $directory;
 
     /**
-     * @var ExtensionResolverInterface
-     *
-     * Extension resolver
-     */
-    protected $extensionResolver;
-
-    /**
      * Construct method
      *
-     * @param DirectoryInterface         $directory         Directory
-     * @param ExtensionResolverInterface $extensionResolver Extension resolver
+     * @param DirectoryInterface $directory Directory
      */
     public function __construct(
-        DirectoryInterface $directory,
-        ExtensionResolverInterface $extensionResolver
+        DirectoryInterface $directory
     )
     {
         $this->directory = $directory;
-        $this->extensionResolver = $extensionResolver;
     }
 
     /**
@@ -76,9 +65,7 @@ class Extractor
         $extension = pathinfo($filePath, PATHINFO_EXTENSION);
         $this->checkDirectory();
 
-        $extractorAdapterNamespace = $this
-            ->extensionResolver
-            ->getAdapterNamespaceGivenExtension($extension);
+        $extractorAdapterNamespace = $this->getAdapterNamespaceGivenExtension($extension);
 
         $extractorAdapter = $this
             ->instanceExtractorAdapter($extractorAdapterNamespace);
@@ -120,5 +107,51 @@ class Extractor
         }
 
         return $this;
+    }
+
+    /**
+     * Return a extractor adapter namespace given an extension
+     *
+     * @param string $fileExtension File extension
+     *
+     * @return string Adapter namespace
+     *
+     * @throws ExtensionNotSupportedException Exception not found
+     */
+    protected function getAdapterNamespaceGivenExtension($fileExtension)
+    {
+        $adapterNamespace = '\Mmoreram\Extractor\Adapter\\';
+
+        switch ($fileExtension) {
+
+            case 'zip':
+                $adapterNamespace .= 'ZipExtractorAdapter';
+                break;
+
+            case 'rar':
+                $adapterNamespace .= 'RarExtractorAdapter';
+                break;
+
+            case 'phar':
+                $adapterNamespace .= 'PharExtractorAdapter';
+                break;
+
+            case 'tar':
+                $adapterNamespace .= 'TarExtractorAdapter';
+                break;
+
+            case 'gz':
+                $adapterNamespace .= 'TarGzExtractorAdapter';
+                break;
+
+            case 'bz2':
+                $adapterNamespace .= 'TarBz2ExtractorAdapter';
+                break;
+
+            default:
+                throw new ExtensionNotSupportedException($fileExtension);
+        }
+
+        return $adapterNamespace;
     }
 }
