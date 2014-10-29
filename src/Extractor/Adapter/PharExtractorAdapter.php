@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
  * This file is part of the Extractor package.
  *
  * For the full copyright and license information, please view the LICENSE
@@ -16,13 +16,12 @@ namespace Mmoreram\Extractor\Adapter;
 use Mmoreram\Extractor\Adapter\Abstracts\AbstractExtractorAdapter;
 use Mmoreram\Extractor\Adapter\Interfaces\ExtractorAdapterInterface;
 use Phar;
-use PharData;
 use Symfony\Component\Finder\Finder;
 
 /**
- * Class TarGzExtractorAdapter
+ * Class PharExtractorAdapter
  */
-class TarGzExtractorAdapter extends AbstractExtractorAdapter implements ExtractorAdapterInterface
+class PharExtractorAdapter extends AbstractExtractorAdapter implements ExtractorAdapterInterface
 {
     /**
      * Return the adapter identifier
@@ -31,7 +30,7 @@ class TarGzExtractorAdapter extends AbstractExtractorAdapter implements Extracto
      */
     public function getIdentifier()
     {
-        return 'Gz';
+        return 'Phar';
     }
 
     /**
@@ -41,7 +40,7 @@ class TarGzExtractorAdapter extends AbstractExtractorAdapter implements Extracto
      */
     public function isAvailable()
     {
-        return class_exists('\PharData');
+        return class_exists('\Phar');
     }
 
     /**
@@ -54,7 +53,7 @@ class TarGzExtractorAdapter extends AbstractExtractorAdapter implements Extracto
     public function extract($filePath)
     {
         $directory = $this->directory->getDirectoryPath();
-        $pharArchive = new PharData($filePath, null, null, Phar::GZ);
+        $pharArchive = new Phar($filePath);
         $pharArchive->extractTo($directory);
 
         return $this->createFinderFromDirectory($directory);

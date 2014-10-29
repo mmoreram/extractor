@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
  * This file is part of the Extractor package.
  *
  * For the full copyright and license information, please view the LICENSE
@@ -15,14 +15,13 @@ namespace Mmoreram\Extractor\Adapter;
 
 use Mmoreram\Extractor\Adapter\Abstracts\AbstractExtractorAdapter;
 use Mmoreram\Extractor\Adapter\Interfaces\ExtractorAdapterInterface;
-use Phar;
-use PharData;
 use Symfony\Component\Finder\Finder;
+use ZipArchive;
 
 /**
- * Class TarExtractorAdapter
+ * Class ZipExtractorAdapter
  */
-class TarExtractorAdapter extends AbstractExtractorAdapter implements ExtractorAdapterInterface
+class ZipExtractorAdapter extends AbstractExtractorAdapter implements ExtractorAdapterInterface
 {
     /**
      * Return the adapter identifier
@@ -31,7 +30,7 @@ class TarExtractorAdapter extends AbstractExtractorAdapter implements ExtractorA
      */
     public function getIdentifier()
     {
-        return 'Tar';
+        return 'Zip';
     }
 
     /**
@@ -41,7 +40,7 @@ class TarExtractorAdapter extends AbstractExtractorAdapter implements ExtractorA
      */
     public function isAvailable()
     {
-        return class_exists('\PharData');
+        return class_exists('\ZipArchive');
     }
 
     /**
@@ -54,8 +53,9 @@ class TarExtractorAdapter extends AbstractExtractorAdapter implements ExtractorA
     public function extract($filePath)
     {
         $directory = $this->directory->getDirectoryPath();
-        $pharArchive = new PharData($filePath, null, null, Phar::TAR);
-        $pharArchive->extractTo($directory);
+        $zipArchive = new ZipArchive();
+        $zipArchive->open($filePath);
+        $zipArchive->extractTo($directory);
 
         return $this->createFinderFromDirectory($directory);
     }

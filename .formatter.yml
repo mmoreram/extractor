@@ -5,7 +5,7 @@ use-sort:
     sort-type: alph
     sort-direction: asc
 header: |
-    /**
+    /*
      * This file is part of the Extractor package.
      *
      * For the full copyright and license information, please view the LICENSE

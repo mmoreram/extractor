@@ -20,7 +20,9 @@
         "ext-zip": "For usage of Zip adapter"
     },
     "autoload": {
-        "psr-4": {"Mmoreram\\Extractor\\": ""}
+        "psr-4": {
+            "Mmoreram\\Extractor\\": "src/Extractor"
+        }
     },
     "minimum-stability": "stable",
     "extra": {

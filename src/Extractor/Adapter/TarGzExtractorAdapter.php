@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
  * This file is part of the Extractor package.
  *
  * For the full copyright and license information, please view the LICENSE
@@ -20,9 +20,9 @@ use PharData;
 use Symfony\Component\Finder\Finder;
 
 /**
- * Class TarBz2ExtractorAdapter
+ * Class TarGzExtractorAdapter
  */
-class TarBz2ExtractorAdapter extends AbstractExtractorAdapter implements ExtractorAdapterInterface
+class TarGzExtractorAdapter extends AbstractExtractorAdapter implements ExtractorAdapterInterface
 {
     /**
      * Return the adapter identifier
@@ -31,7 +31,7 @@ class TarBz2ExtractorAdapter extends AbstractExtractorAdapter implements Extract
      */
     public function getIdentifier()
     {
-        return 'Bz2';
+        return 'Gz';
     }
 
     /**
@@ -54,7 +54,7 @@ class TarBz2ExtractorAdapter extends AbstractExtractorAdapter implements Extract
     public function extract($filePath)
     {
         $directory = $this->directory->getDirectoryPath();
-        $pharArchive = new PharData($filePath, null, null, Phar::BZ2);
+        $pharArchive = new PharData($filePath, null, null, Phar::GZ);
         $pharArchive->extractTo($directory);
 
         return $this->createFinderFromDirectory($directory);
