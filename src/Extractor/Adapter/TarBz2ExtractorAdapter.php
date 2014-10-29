@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
  * This file is part of the Extractor package.
  *
  * For the full copyright and license information, please view the LICENSE
@@ -15,14 +15,14 @@ namespace Mmoreram\Extractor\Adapter;
 
 use Mmoreram\Extractor\Adapter\Abstracts\AbstractExtractorAdapter;
 use Mmoreram\Extractor\Adapter\Interfaces\ExtractorAdapterInterface;
-use RarArchive;
-use RarEntry;
+use Phar;
+use PharData;
 use Symfony\Component\Finder\Finder;
 
 /**
- * Class RarExtractorAdapter
+ * Class TarBz2ExtractorAdapter
  */
-class RarExtractorAdapter extends AbstractExtractorAdapter implements ExtractorAdapterInterface
+class TarBz2ExtractorAdapter extends AbstractExtractorAdapter implements ExtractorAdapterInterface
 {
     /**
      * Return the adapter identifier
@@ -31,7 +31,7 @@ class RarExtractorAdapter extends AbstractExtractorAdapter implements ExtractorA
      */
     public function getIdentifier()
     {
-        return 'Rar';
+        return 'Bz2';
     }
 
     /**
@@ -41,7 +41,7 @@ class RarExtractorAdapter extends AbstractExtractorAdapter implements ExtractorA
      */
     public function isAvailable()
     {
-        return class_exists('\RarArchive');
+        return class_exists('\PharData');
     }
 
     /**
@@ -54,16 +54,8 @@ class RarExtractorAdapter extends AbstractExtractorAdapter implements ExtractorA
     public function extract($filePath)
     {
         $directory = $this->directory->getDirectoryPath();
-        $rarArchive = RarArchive::open($filePath);
-        $rarEntries = $rarArchive->getEntries();
-
-        /**
-         * @var RarEntry $rarEntiry
-         */
-        foreach ($rarEntries as $rarEntry) {
-
-            $rarEntry->extract($directory);
-        }
+        $pharArchive = new PharData($filePath, null, null, Phar::BZ2);
+        $pharArchive->extractTo($directory);
 
         return $this->createFinderFromDirectory($directory);
     }

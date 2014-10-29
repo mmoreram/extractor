@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
  * This file is part of the Extractor package.
  *
  * For the full copyright and license information, please view the LICENSE
@@ -15,13 +15,14 @@ namespace Mmoreram\Extractor\Adapter;
 
 use Mmoreram\Extractor\Adapter\Abstracts\AbstractExtractorAdapter;
 use Mmoreram\Extractor\Adapter\Interfaces\ExtractorAdapterInterface;
+use RarArchive;
+use RarEntry;
 use Symfony\Component\Finder\Finder;
-use ZipArchive;
 
 /**
- * Class ZipExtractorAdapter
+ * Class RarExtractorAdapter
  */
-class ZipExtractorAdapter extends AbstractExtractorAdapter implements ExtractorAdapterInterface
+class RarExtractorAdapter extends AbstractExtractorAdapter implements ExtractorAdapterInterface
 {
     /**
      * Return the adapter identifier
@@ -30,7 +31,7 @@ class ZipExtractorAdapter extends AbstractExtractorAdapter implements ExtractorA
      */
     public function getIdentifier()
     {
-        return 'Zip';
+        return 'Rar';
     }
 
     /**
@@ -40,7 +41,7 @@ class ZipExtractorAdapter extends AbstractExtractorAdapter implements ExtractorA
      */
     public function isAvailable()
     {
-        return class_exists('\ZipArchive');
+        return class_exists('\RarArchive');
     }
 
     /**
@@ -53,9 +54,16 @@ class ZipExtractorAdapter extends AbstractExtractorAdapter implements ExtractorA
     public function extract($filePath)
     {
         $directory = $this->directory->getDirectoryPath();
-        $zipArchive = new ZipArchive();
-        $zipArchive->open($filePath);
-        $zipArchive->extractTo($directory);
+        $rarArchive = RarArchive::open($filePath);
+        $rarEntries = $rarArchive->getEntries();
+
+        /**
+         * @var RarEntry $rarEntiry
+         */
+        foreach ($rarEntries as $rarEntry) {
+
+            $rarEntry->extract($directory);
+        }
 
         return $this->createFinderFromDirectory($directory);
     }
